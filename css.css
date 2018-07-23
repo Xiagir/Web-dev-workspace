@@ -1,0 +1,101 @@
+body {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+header {
+    position: relative;
+    height: 40%;
+    width: 100%;
+    background-color: #DFDEDE;
+    text-align: center;
+}
+
+.title h1 {
+    margin: 0;
+}
+
+.title h2 {
+    margin: 0;
+}
+
+.title {
+    font-family: "Verdana";
+    color: slategrey;
+}
+
+h2 {
+    font-family: "Courier New", monospace;
+    color: slategrey;
+
+}
+
+nav {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+nav a {
+
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    background-color: #CBC9C9;
+}
+
+a:hover {
+    background-color: #BEBhBBB;
+}
+
+.wrapper-div {
+    margin: 5px;
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #CBC9C9;
+    width: 15%;
+    height: 400px;
+}
+
+
+#dices {
+  align-content: center;
+
+
+}
+
+#rolled {
+
+}
+
+#sroll {
+
+}
+
+#stats {
+
+}
+
+.dice
+{
+
+  height:100px;
+  width:100px;
+  background:  #b30000;
+  margin-left: 90px;
+  margin-top: 20%;
+
+  box-shadow: 5px 10px 8px 1px #888888;
+  border-radius: 10px;
+  outline: none;
+}
+.dot
+{
+  position: absolute;
+  height:30px;
+  width:30px;
+  border-radius: 50%;
+  background: black;
+  display: none;
+}

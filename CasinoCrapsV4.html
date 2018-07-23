@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> Casino Craps </title>
+<meta charset="utf-8">
+<!--
+File name: consoleCraps.html
+Author:
+Date created:
+Date modified:
+Version: 1.0
+Description:
+-->
+
+<style>
+body {
+	width: 90%;
+	margin: auto;
+}
+nav {
+	text-align: center;
+	background-color:#333;
+	overflow: hidden;
+	padding: 14px 20px;
+}
+nav a {
+	text-align: center;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+main {
+	
+	background-color: LightGray;
+	padding: 30px 30px 30px;
+}
+
+#gameBox {
+	width: 600px;
+	height: 300px;
+	margin: auto;
+	padding: 30px;
+	text-align: center;
+	background-color: white;
+	border: 1px solid green;
+}
+
+main img {
+	height: 200px;
+}
+td:hover {
+    background-color: #555555;
+    color: white;
+}
+
+button {
+	font-weight: bold;
+	font-size: 16px;
+	background-color: white;
+    color: black
+	
+    border: 2px solid #555555;
+}
+
+button:hover {
+    background-color: #555555;
+    color: white;
+}
+
+footer {
+    margin: auto;
+    text-align: center;
+    color: black;
+	padding: 10px;
+    clear: both;
+}
+
+</style>
+</head>
+<body>
+<header>
+	<img class="Slides" src="slice1.jpg" alt="a" style="width:100%; height: 150px">
+	<img class="Slides" src="slice2.jpg" alt="a" style="width:100%; height: 150px" >
+	<img class="Slides" src="slice3.jpg" alt="a" style="width:100%; height: 150px">
+	<img class="Slides" src="slice4.jpg" alt="a" style="width:100%; height: 150px">
+</header>
+<nav>   
+	<a href="Home.html">Home</a>
+    <a href="Casino Craps Solution.html">Casino Craps</a>
+    <a href="tictactoeSolution.html">Tic Tac Toe</a>
+    <a href="Bingo solution.html">Bingo</a>
+    <a href="Memory solution.html">Concentration</a>
+</nav>
+	
+<main>
+	<div id = "gameBox">
+	
+	
+	</div>
+</main>
+<footer>
+        <address>Web Programming &copy; Sheridan College</address>         
+ </footer>
+<script>
+var index = 0;
+function changeSlides () {
+    var counter;
+    var slice = document.getElementsByClassName("Slides");
+    for (counter = 0; counter < slice.length; counter++) {
+        slice[counter].style.display = "none";
+    }
+    index++;
+    if (index > slice.length) {index = 1}
+    slice[index-1].style.display = "block";
+    setTimeout(changeSlides,2000);
+};
+document.addEventListener("DOMContentLoaded", changeSlides);
+
+var gameBox = document.getElementById("gameBox");
+function createGameBox (){
+//	var myPic = gameBox.appendChild(document.createElement("img"));
+//	myPic.setAttribute("src", "throwDice.jpg"); 
+//	myPic.setAttribute("id", "throwDicePic");
+	
+	var pic1 = gameBox.appendChild(document.createElement("img"));
+	pic1.setAttribute("id", "pic1");
+	var pic2 = gameBox.appendChild(document.createElement("img"));
+	pic2.setAttribute("id", "pic2");
+	
+	var gameStatus = gameBox.appendChild(document.createElement("p"));
+	gameStatus.setAttribute("id", "gameStatus");
+	gameStatus.appendChild(document.createTextNode("Click Start to play game"));
+	
+	
+	var startButton = gameBox.appendChild(document.createElement("button"));
+	startButton.setAttribute("id", "start");
+	startButton.appendChild(document.createTextNode("Start"));
+
+	var newButton = gameBox.appendChild(document.createElement("button"));
+	newButton.setAttribute("id", "newButton");
+	newButton.appendChild(document.createTextNode("Roll Again"));
+	newButton.style.display = "none";
+	
+	var button = gameBox.appendChild(document.createElement("button"));
+	button.setAttribute("id", "reset");
+	button.appendChild(document.createTextNode("Reset"));
+}
+createGameBox();
+
+var dice1, dice2;
+var gameStatus = document.getElementById("gameStatus");
+var newButton = document.getElementById("newButton");
+var total;
+function playGame() {
+
+//	document.getElementById("throwDicePic").style.display = "none";
+	dice1 = Math.floor(Math.random()*6) + 1;
+	dice2 = Math.floor(Math.random()*6) + 1;
+	total = dice1 + dice2;
+	changePictures(dice1, dice2);
+	
+
+	
+	document.getElementById("start").style.display = "none";
+	if(total == 7 || total == 11){
+		gameStatus.innerText = "That's a natural. You win";
+		gameStatus.style.color = "Green";
+	}else if (total == 2 || total ==3 || total == 12){
+		gameStatus.innerText = "That's a craps. You lose.";
+		gameStatus.style.color = "Red";
+	}else{
+		newButton.style.display = "inline";
+		var point = total;
+		gameStatus.innerText = "Your point is " + point;
+		var askAgain = true;
+
+		document.getElementById("newButton").onclick = function tossAgain(){
+			dice1 = Math.floor(Math.random()*6) + 1;
+			dice2 = Math.floor(Math.random()*6) + 1;
+			total = dice1 + dice2;
+			changePictures(dice1, dice2);
+				
+			if(total == point){
+				gameStatus.innerText = "You made your point. You win";
+				gameStatus.style.color = "Green";
+				newButton.style.display = "none";
+				askAgain =  false;
+			}else if (total == 7){
+				gameStatus.innerText = "That's a 7. You lose.";
+				gameStatus.style.color = "Red";
+				newButton.style.display = "none";
+				askAgain =false;
+			}
+		}
+	}
+}
+document.getElementById("start").addEventListener("click", playGame);
+
+function changePictures(dice1, dice2) {
+
+	switch(dice1){
+		case 1: sourcePicture1 = 'Dice1.png'; break;
+		case 2: sourcePicture1 = 'Dice2.png'; break;
+		case 3: sourcePicture1 = 'Dice3.png'; break;
+		case 4: sourcePicture1 = 'Dice4.png'; break;
+		case 5: sourcePicture1 = 'Dice5.png'; break;
+		case 6: sourcePicture1 = 'Dice6.png'; break;
+	}
+	document.getElementById("pic1").src = sourcePicture1;
+	switch(dice2){
+		case 1: sourcePicture2 = "Dice1.png"; break;
+		case 2: sourcePicture2 = "Dice2.png"; break;
+		case 3: sourcePicture2 = "Dice3.png"; break;
+		case 4: sourcePicture2 = "Dice4.png"; break;
+		case 5: sourcePicture2 = "Dice5.png"; break;
+		case 6: sourcePicture2 = "Dice6.png"; break;
+	}
+	document.getElementById("pic2").src = sourcePicture2;
+}
+//this is the function to reset
+document.getElementById("reset").addEventListener("click", function() {location.reload()});
+</script>
+	
+</body>
+</html>
